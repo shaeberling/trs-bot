@@ -84,8 +84,8 @@ physical one, that plays a real game on a real machine. How cool would that be?
 
 ### 2024: The plan
 
-I write down a project plan and share it with my co-conspirators, Lawrence and
-Arno: [*TRS-AI: A game-playing robot*](https://docs.google.com/document/d/1ZZ-qDxlGa7vthX1Go8zEbySD5BxhOppnMQ5m7deZFhU/edit?usp=sharing).
+I write down a project plan and share it with my co-conspirators, Lawrence Kesteloot and
+Arno Puder: [*TRS-AI: A game-playing robot*](https://docs.google.com/document/d/1ZZ-qDxlGa7vthX1Go8zEbySD5BxhOppnMQ5m7deZFhU/edit?usp=sharing).
 The goal is a kick-ass demo for Tandy Assembly 2025, and the plan lays out in
 detail how the whole system would work.
 

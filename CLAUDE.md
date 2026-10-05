@@ -1,6 +1,6 @@
 # Notes for Claude
 
-Trsbot is a robot that plays video games on an **unmodified** TRS-80 Model I.
+TRS-Bot is a robot that plays video games on an **unmodified** TRS-80 Model I.
 A USB camera on a tripod watches the CRT, and solenoids sitting on top of the
 keyboard press the keys. The policy is trained in simulation. The demo is at
 **Tandy Assembly 2027** (about October 2027; 2026 was Oct 2–4 in Cincinnati).
@@ -97,7 +97,7 @@ screen reader can be tested on its own by pointing the camera at a real Model I.
 - `~/mine/defense-command-ai`: the user's earlier attempt (Python, Keras DQN)
   at the TRS8BIT 2024 Defense Command contest. It drove trs80gp (a Model III
   emulator) over TCP using a modified game that sent out entity state. That
-  state isn't available here; Trsbot only has pixels.
+  state isn't available here; TRS-Bot only has pixels.
 
 ## Open questions
 
