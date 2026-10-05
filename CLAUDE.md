@@ -9,10 +9,21 @@ keyboard, then play and win whatever supported game is running.
 
 ## Current state (Oct 2026)
 
-There's no code yet. `README.md` has the goal, `PARTS.md` has the candidate
-parts, and `SUGGESTIONS.md` has the design review: the reasoning, open
-decisions, next steps and sources. As code arrives, add the layout and commands
-here.
+There's no code yet. What's here:
+
+- `README.md`: the public face of the project. It has the goals, how it
+  works, known challenges, the project's history from 2013 to 2027, and
+  references.
+- `PARTS.md`: candidate hardware parts.
+- `SUGGESTIONS.md`: the design review, with the reasoning, open decisions,
+  next steps and sources.
+- `docs/images/`: the logo and architecture diagrams used by the README. The
+  diagram has light and dark variants (`architecture.png`,
+  `architecture-dark.png`), so update both when the architecture changes.
+- `LICENSE`: Apache 2.0.
+
+The repo is `github.com/shaeberling/trs-bot` (the user's friend's account).
+As code arrives, add the layout and commands here.
 
 ## Hard constraints
 
