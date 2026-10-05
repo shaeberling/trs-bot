@@ -30,7 +30,10 @@ Straight from the original plan, with the year updated:
 The architecture:
 
 <p align="center">
-  <img src="docs/images/architecture.png" alt="Architecture diagram: a camera films the TRS-80 screen; a computer captures frames, detects characters, runs the pretrained AI program and sends keyboard events to a control board that drives solenoids pressing the TRS-80 keys" width="800">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/architecture-dark.png">
+    <img src="docs/images/architecture.png" alt="Architecture diagram: a camera films the TRS-80 screen; a computer captures frames, detects characters, runs the pretrained AI program and sends keyboard events to a control board that drives solenoids pressing the TRS-80 keys" width="800">
+  </picture>
 </p>
 
 1. **Camera**: points at the screen of a real TRS-80.
