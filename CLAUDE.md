@@ -20,6 +20,10 @@ There's no code yet. What's here:
 - `docs/images/`: the logo and architecture diagrams used by the README. The
   diagram has light and dark variants (`architecture.png`,
   `architecture-dark.png`), so update both when the architecture changes.
+- `docs/solenoid-test.md`: wiring and first-test steps for the Pico + MOSFET
+  board + solenoid rig. Its diagram, `docs/images/solenoid-circuit.svg`, has a
+  `-dark.svg` twin that differs only in the colors in its `<style>` block, so
+  make the same edits to both.
 - `LICENSE`: Apache 2.0.
 
 The repo is `github.com/shaeberling/trs-bot` (the user's friend's account).
@@ -39,14 +43,18 @@ As code arrives, add the layout and commands here.
 
 ## Hardware notes
 
-- Solenoid: Adafruit #413. 12 V, ~250 mA, ~12 Ω, 10 mm throw, 6 N, rated **50%
-  duty cycle**. Holding a key down for a long time (as when steering) heats it,
-  so use peak-and-hold PWM: full power for ~20 ms, then a much lower holding
-  duty.
-- Driver: ULN2803A. Connect COM (pin 10) to +12 V to use the built-in flyback
-  diodes. Each channel handles 500 mA, but the package is limited to ~2.25 W in
-  total. At ~1 V Vce(sat) and 250 mA, that's ~0.25 W per active channel, so
-  several keys held for a long time get warm.
+- Solenoid: Adafruit #413. 12 V, ~12 Ω, 10 mm throw, 6 N, rated **50% duty
+  cycle**. Adafruit's page says "about 250mA", but 12 V across ~12 Ω is ~1 A,
+  so plan for 1 A. A cheaper alternative is the generic JF-0530B (12 V,
+  850 mA, 5 N, 10 mm, 30×16×15 mm, lighter and narrower). Holding a key down
+  for a long time (as when steering) heats either one, so use peak-and-hold
+  PWM: full power for ~20 ms, then a much lower holding duty.
+- Driver: at ~1 A per solenoid, one ULN2803A channel (500 mA max) is not
+  enough, and at ~1 V Vce(sat) each active channel would dissipate ~1 W against
+  the package's ~2.25 W total. Use a logic-level N-MOSFET per solenoid (e.g.
+  AO3400 or IRLZ44N) with a flyback diode. Peak-and-hold lowers the average
+  current but not the ~1 A peak. Size the 12 V supply for several solenoids
+  pulsing at once.
 - USB-to-GPIO options in PARTS.md: FT232H, Numato 8-ch, MCP2221A (only 4 GPIO,
   one short). A microcontroller such as a Raspberry Pi Pico is worth a look. It
   gives timed pulses, peak-and-hold PWM, and USB CDC serial, and it timestamps

@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" width="920" height="620" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <style>
+    .bg { fill: #fdfaf3; }
+    .ink { fill: #2b2b2b; }
+    .muted { fill: #6b6b6b; }
+    .w12 { stroke: #e5484d; }
+    .wg { stroke: #2b2b2b; }
+    .ws { stroke: #f5a524; }
+    .wsw { stroke: #8e4ec6; }
+    .dot12 { fill: #e5484d; }
+    .dotsw { fill: #8e4ec6; }
+    .cap { fill: #f3efe6; stroke: #b9b2a3; }
+    .base { fill: #b9b2a3; }
+    .cord { stroke: #8a8a8a; }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="920" height="620" rx="24"/>
+
+  <text class="ink" x="40" y="52" font-size="26" font-weight="700">Solenoid test rig</text>
+  <text class="muted" x="40" y="78" font-size="14">One channel shown. For the second solenoid, add another board on GP14, sharing the supply and ground.</text>
+
+  <!-- Wires (drawn first so the parts sit on top) -->
+  <g fill="none" stroke-width="4" stroke-linecap="round">
+    <path class="ws" d="M178,230 H342"/>
+    <path class="wg" d="M178,370 H342"/>
+    <path class="w12" d="M530,200 H660"/>
+    <path class="wg" d="M530,245 H660"/>
+    <path class="w12" d="M530,320 H720"/>
+    <path class="wsw" d="M530,390 H720"/>
+    <path class="cord" d="M860,217 C 895,217 880,135 900,120"/>
+  </g>
+
+  <!-- Wire labels -->
+  <text class="ink" x="200" y="221" font-size="12" font-weight="600">GP15</text>
+  <text class="muted" x="262" y="250" font-size="12" text-anchor="middle">3.3 V signal</text>
+  <text class="ink" x="200" y="361" font-size="12" font-weight="600">GND</text>
+  <text class="muted" x="262" y="390" font-size="12" text-anchor="middle">shared ground</text>
+  <text class="muted" x="262" y="405" font-size="12" text-anchor="middle">(don't skip it!)</text>
+  <text class="ink" x="650" y="194" font-size="14" font-weight="700" text-anchor="end">+</text>
+  <text class="ink" x="650" y="239" font-size="14" font-weight="700" text-anchor="end">−</text>
+  <text class="muted" x="878" y="110" font-size="12" text-anchor="middle">to wall</text>
+  <text class="muted" x="585" y="312" font-size="12" text-anchor="middle">+12 V</text>
+  <text class="muted" x="585" y="410" font-size="12" text-anchor="middle">switched</text>
+
+  <!-- Pico -->
+  <text class="muted" x="115" y="145" font-size="13" text-anchor="middle">USB to laptop</text>
+  <rect x="95" y="156" width="40" height="20" rx="3" fill="#c9ced6" stroke="#8a9099" stroke-width="2"/>
+  <rect x="40" y="170" width="150" height="250" rx="10" fill="#3fa66b" stroke="#2d7a4f" stroke-width="3"/>
+  <g fill="#e9c46a">
+    <circle cx="52" cy="190" r="4"/><circle cx="52" cy="210" r="4"/><circle cx="52" cy="230" r="4"/>
+    <circle cx="52" cy="250" r="4"/><circle cx="52" cy="270" r="4"/><circle cx="52" cy="290" r="4"/>
+    <circle cx="52" cy="310" r="4"/><circle cx="52" cy="330" r="4"/><circle cx="52" cy="350" r="4"/>
+    <circle cx="52" cy="370" r="4"/><circle cx="52" cy="390" r="4"/><circle cx="52" cy="410" r="4"/>
+    <circle cx="178" cy="190" r="4"/><circle cx="178" cy="210" r="4"/><circle cx="178" cy="230" r="6"/>
+    <circle cx="178" cy="250" r="4"/><circle cx="178" cy="270" r="4"/><circle cx="178" cy="290" r="4"/>
+    <circle cx="178" cy="310" r="4"/><circle cx="178" cy="330" r="4"/><circle cx="178" cy="350" r="4"/>
+    <circle cx="178" cy="370" r="6"/><circle cx="178" cy="390" r="4"/><circle cx="178" cy="410" r="4"/>
+  </g>
+  <rect x="88" y="262" width="54" height="54" rx="4" fill="#222"/>
+  <text x="115" y="293" font-size="9" fill="#ddd" text-anchor="middle">RP2040</text>
+  <text x="115" y="370" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">Pico</text>
+
+  <!-- MOSFET board -->
+  <rect x="330" y="170" width="200" height="250" rx="10" fill="#3b6fd4" stroke="#2a52a0" stroke-width="3"/>
+  <circle cx="360" cy="192" r="5" fill="#ff6b6b"/>
+  <g fill="#e9c46a">
+    <rect x="337" y="225" width="10" height="10" rx="2"/>
+    <rect x="337" y="365" width="10" height="10" rx="2"/>
+  </g>
+  <g font-size="12" fill="#fff">
+    <text x="356" y="234">TRIG</text>
+    <text x="356" y="374">GND</text>
+    <text x="498" y="204" text-anchor="end">VIN+</text>
+    <text x="498" y="249" text-anchor="end">VIN−</text>
+    <text x="498" y="324" text-anchor="end">OUT+</text>
+    <text x="498" y="394" text-anchor="end">OUT−</text>
+  </g>
+  <g>
+    <rect x="505" y="189" width="25" height="22" rx="3" fill="#48b07a"/>
+    <rect x="505" y="234" width="25" height="22" rx="3" fill="#48b07a"/>
+    <rect x="505" y="309" width="25" height="22" rx="3" fill="#48b07a"/>
+    <rect x="505" y="379" width="25" height="22" rx="3" fill="#48b07a"/>
+  </g>
+  <g fill="#2b2b2b">
+    <circle cx="517.5" cy="200" r="6"/><circle cx="517.5" cy="245" r="6"/>
+    <circle cx="517.5" cy="320" r="6"/><circle cx="517.5" cy="390" r="6"/>
+  </g>
+  <g stroke="#9aa0a8" stroke-width="2">
+    <path d="M513,200 h9"/><path d="M513,245 h9"/><path d="M513,320 h9"/><path d="M513,390 h9"/>
+  </g>
+  <rect x="380" y="268" width="36" height="26" rx="3" fill="#1d1d1f"/>
+  <rect x="424" y="268" width="36" height="26" rx="3" fill="#1d1d1f"/>
+  <text x="398" y="285" font-size="8" fill="#bbb" text-anchor="middle">D4184</text>
+  <text x="442" y="285" font-size="8" fill="#bbb" text-anchor="middle">D4184</text>
+  <text x="420" y="348" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">MOSFET</text>
+  <text x="420" y="366" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">board</text>
+
+  <!-- Power supply -->
+  <rect x="660" y="165" width="200" height="105" rx="12" fill="#4a4a52" stroke="#33333a" stroke-width="3"/>
+  <text x="760" y="213" font-size="20" font-weight="700" fill="#fff" text-anchor="middle">12 V  5 A</text>
+  <text x="760" y="236" font-size="13" fill="#ddd" text-anchor="middle">power supply</text>
+
+  <!-- Flyback diode: cathode (bar, stripe) up to +12 V -->
+  <circle class="dot12" cx="640" cy="320" r="5"/>
+  <circle class="dotsw" cx="640" cy="390" r="5"/>
+  <g class="wg" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M640,320 V348"/>
+    <path d="M640,372 V390"/>
+    <path d="M627,348 H653"/>
+  </g>
+  <path class="ink" d="M627,372 H653 L640,349 Z"/>
+  <text class="ink" x="620" y="352" font-size="12" font-weight="600" text-anchor="end">1N5819</text>
+  <text class="muted" x="620" y="367" font-size="11" text-anchor="end">stripe to +12 V</text>
+
+  <!-- Solenoid -->
+  <rect x="720" y="295" width="80" height="120" rx="8" fill="#b8bec7" stroke="#8a9099" stroke-width="3"/>
+  <rect x="732" y="308" width="56" height="94" rx="4" fill="#c98a3c"/>
+  <g stroke="#a86c26" stroke-width="2">
+    <path d="M732,316 h56"/><path d="M732,324 h56"/><path d="M732,332 h56"/><path d="M732,340 h56"/>
+    <path d="M732,348 h56"/><path d="M732,356 h56"/><path d="M732,364 h56"/><path d="M732,372 h56"/>
+    <path d="M732,380 h56"/><path d="M732,388 h56"/><path d="M732,396 h56"/>
+  </g>
+  <rect x="752" y="415" width="16" height="38" rx="2" fill="#d9dde3" stroke="#8a9099" stroke-width="2"/>
+  <rect x="747" y="453" width="26" height="7" rx="3" fill="#e57a9a"/>
+  <text class="ink" x="815" y="340" font-size="14" font-weight="700">solenoid</text>
+  <text class="muted" x="815" y="357" font-size="12">JF-0530B</text>
+  <text class="muted" x="815" y="372" font-size="12">12 V, ~0.85 A</text>
+
+  <!-- Key -->
+  <path class="cap" d="M732,462 H788 L800,492 H720 Z" stroke-width="2"/>
+  <text class="ink" x="760" y="484" font-size="15" font-weight="700" text-anchor="middle">↑</text>
+  <rect class="base" x="690" y="492" width="140" height="12" rx="4"/>
+  <text class="muted" x="760" y="524" font-size="12" text-anchor="middle">TRS-80 key</text>
+  <g stroke="#f5a524" stroke-width="2.5" stroke-linecap="round" fill="none">
+    <path d="M712,448 l-12,-6"/><path d="M708,460 l-14,0"/>
+    <path d="M808,448 l12,-6"/><path d="M812,460 l14,0"/>
+  </g>
+  <text x="832" y="465" font-size="14" font-style="italic" font-weight="700" fill="#f5a524">tap!</text>
+
+  <!-- Legend -->
+  <g stroke-width="4" stroke-linecap="round">
+    <path class="w12" d="M40,562 h30"/>
+    <path class="wg" d="M170,562 h30"/>
+    <path class="ws" d="M300,562 h30"/>
+    <path class="wsw" d="M460,562 h30"/>
+  </g>
+  <g class="ink" font-size="13">
+    <text x="78" y="567">+12 V</text>
+    <text x="208" y="567">ground</text>
+    <text x="338" y="567">3.3 V signal</text>
+    <text x="498" y="567">switched to ground (low side)</text>
+  </g>
+  <text class="muted" x="40" y="596" font-size="13">When TRIG is high, the board connects OUT− to ground and the solenoid fires. The diode catches the kick when it turns off.</text>
+</svg>

@@ -35,16 +35,20 @@ to last longer than one scan by the game. Aim for at least 30–50 ms.
 
 ## 3. Manage solenoid heat
 
-The Adafruit #413 (12 V, ~250 mA, ~12 Ω, 10 mm throw, 6 N) is rated for a **50%
-duty cycle**. Steering means holding keys down, so use peak-and-hold drive:
-full power for about 20 ms to pull the plunger in, then drop to a much lower
-PWM duty to hold it.
+The Adafruit #413 (12 V, ~12 Ω, 10 mm throw, 6 N) is rated for a **50% duty
+cycle**. Adafruit's page says "about 250mA", but 12 V across ~12 Ω is ~1 A. The
+cheaper generic JF-0530B (12 V, 850 mA, 5 N, 10 mm) draws about the same.
+Steering means holding keys down, so use peak-and-hold drive: full power for
+about 20 ms to pull the plunger in, then drop to a much lower PWM duty to hold
+it.
 
-ULN2803A notes:
-- Tie COM (pin 10) to +12 V so the built-in flyback diodes work.
-- Each channel handles 500 mA, but the package is limited to ~2.25 W in total.
-  At ~1 V Vce(sat) and 250 mA, that's ~0.25 W per active channel. Several keys
-  held at once get warm, and peak-and-hold helps here too.
+Driver notes:
+- A ULN2803A channel handles only 500 mA, and at ~1 V Vce(sat) and ~1 A each
+  active channel would dissipate ~1 W, against ~2.25 W for the whole package.
+- Use a logic-level N-MOSFET per solenoid instead (e.g. AO3400 or IRLZ44N),
+  with a flyback diode across each coil.
+- Peak-and-hold lowers the average current but not the ~1 A peak, so size the
+  12 V supply for several solenoids pulsing at once.
 
 ## 4. Consider a Raspberry Pi Pico for the key driver
 
@@ -128,6 +132,7 @@ some real captures from at least two different machines.
 ## Sources
 
 - [Adafruit #413 Large Push-Pull Solenoid](https://www.adafruit.com/product/413)
+- [JF-0530B 12 V solenoid, 2-pack (Amazon)](https://www.amazon.com/dp/B0FFGJVV8N)
 - [Tandy Assembly](https://www.tandyassembly.com/)
 - [Deskthority: Model I Alps vs Hi-Tek keyboards](https://deskthority.net/viewtopic.php?t=13003)
 - [Deskthority wiki: TRS-80 Model I](https://deskthority.net/wiki/Radio_Shack_TRS-80_Model_I)
