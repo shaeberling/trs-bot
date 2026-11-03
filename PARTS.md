@@ -28,9 +28,9 @@ The listing also says 300 mA in one place, so measure the coil resistance.
 
 Lawrence bought a pair Oct 31.
 
-![JF-0530B diagram](datasheets/JF-0530B diagram.jpg)
+![JF-0530B diagram](datasheets/JF-0530B%20diagram.jpg)
 
-[Datasheet](datasheets/JF-0530B datasheet.pdf)
+[Datasheet](datasheets/JF-0530B%20datasheet.pdf)
 
 # Solenoid driver
 
