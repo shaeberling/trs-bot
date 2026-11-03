@@ -1,4 +1,7 @@
 
+# Solenoid
+
+## Adafruit 413
 
 https://www.adafruit.com/product/413 (out of stock)
 
@@ -10,7 +13,7 @@ Adafruit says "about 250mA", but 12 V / 12 Ω is ~1 A, so plan for 1 A.
 40 mm body, 144 g, 4x M3 threaded mounting holes.
 put a small rubber bumper or felt pad on each plunger tip
 
----
+## JF-0530B
 
 Cheaper alternative: generic JF-0530B solenoid, 2-pack, $12.88
 
@@ -21,12 +24,25 @@ https://www.amazon.com/dp/B0FFGJVV8N
 Smaller and lighter than the #413, which helps for neighboring keys.
 No duty-cycle rating, so assume 50% or worse and use peak-and-hold.
 The listing also says 300 mA in one place, so measure the coil resistance.
+(Measured at 13.7 Ω, so 850 mA seems correct.)
 
 Lawrence bought a pair Oct 31.
 
----
+![JF-0530B diagram](datasheets/JF-0530B diagram.jpg)
 
-ULN2803A
+[Datasheet](datasheets/JF-0530B datasheet.pdf)
+
+# Solenoid driver
+
+## MTSD001 (MOSFET Trigger Switch Drive Module)
+
+https://www.amazon.com/dp/B0FMJH3DML
+
+$6 for 6, Lawrence bought a set Oct 31.
+
+Signal range: 3.3 V to 20 V. Working voltage: 5 V to 36 V. PWM up to 20 KHz.
+
+## ULN2803A
 
 https://www.digikey.com/en/products/detail/stmicroelectronics/ULN2803A/599591
 
@@ -35,7 +51,7 @@ Bipolar (BJT) Transistor Array 8 NPN Darlington 50V 500mA 2.25W Through Hole 18-
 Not enough for these solenoids: ~1 A each is over the 500 mA channel limit, and
 ~1 W per active channel quickly reaches the 2.25 W package limit.
 
----
+## N-MOSFET
 
 Logic-level N-MOSFET per solenoid (e.g. AO3400 or IRLZ44N), plus a flyback
 diode (e.g. 1N4001 or 1N5819) across each coil. Replaces the ULN2803A.
@@ -49,18 +65,28 @@ MOSFET's body diode doesn't count: it's reverse-biased by the turn-off spike.)
 Low-side switch. A reviewer measured the trigger switching at about 3 V, which
 is close to the Pico's 3.3 V, so check that OUT+/OUT- drops to near 0 V when on.
 
----
+# Flyback diode
 
-Flyback diodes: 1N5819 Schottky, 1 A 40 V, 100-pack, $7.99
-https://www.amazon.com/dp/B079KG1TN2
 One across each solenoid, cathode (stripe) to +12 V.
 
----
+## 1N5819 Schottky
+
+1 A 40 V, 100-pack, $7.99
+
+https://www.amazon.com/dp/B079KG1TN2
+
+https://www.amazon.com/dp/B0FC2CWKPL ($8 for 150) Lawrence bought this Oct 31.
+
+# Power supply
 
 12 V 5 A power supply, ALITOVE, $12.99
+
 https://www.amazon.com/dp/B01GEA8PQA
+
 5.5x2.5 mm plug, comes with a female barrel-to-screw-terminal adapter.
 Two solenoids need ~2 A; 5 A leaves room for more keys later.
+
+Lawrence bought this Oct 31.
 
 ---
 
@@ -91,7 +117,7 @@ It works the same way as the FT232H but has only four GPIO pins, one short of wh
 
 Controller board:
 
-    Pico / Pico 2: USB Full-Speed (12 Mbps), 1 ms frames.
-    ESP32-S3: USB Full-Speed (12 Mbps), 1 ms frames.
-    Teensy 4.0: USB High-Speed (480 Mbps), 125 µs microframes.
+- Pico / Pico 2: USB Full-Speed (12 Mbps), 1 ms frames.
+- ESP32-S3: USB Full-Speed (12 Mbps), 1 ms frames.
+- Teensy 4.0: USB High-Speed (480 Mbps), 125 µs microframes.
 
