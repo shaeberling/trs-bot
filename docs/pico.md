@@ -157,11 +157,11 @@ Build:
 
 ```bash
 cmake -S . -B build -G "Unix Makefiles" && make -C build -j
+cmake -S . -B build -G Ninja && ninja -C build
 ```
 
-Or leave out `-G "Unix Makefiles"` to get Ninja and build with
-`ninja -C build`. After the first configure, only the `make` (or `ninja`) step
-is needed; it re-runs CMake when `CMakeLists.txt` changes.
+After the first configure, only the `make` (or `ninja`) step is needed; it
+re-runs CMake when `CMakeLists.txt` changes.
 
 ## 4. Flash and watch the output
 
