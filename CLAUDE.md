@@ -24,6 +24,10 @@ There's no code yet. What's here:
   board + solenoid rig. Its diagram, `docs/images/solenoid-circuit.svg`, has a
   `-dark.svg` twin that differs only in the colors in its `<style>` block, so
   make the same edits to both.
+- `docs/pico.md`: C/C++ toolchain setup for the Pico 2 W (Pico SDK, Arm GNU
+  Toolchain, CMake + make), a minimal solenoid project, and flashing. On this
+  machine the SDK is at `~/others/pico/pico-sdk` and `PICO_SDK_PATH` is set
+  in `~/.zshenv`.
 - `LICENSE`: Apache 2.0.
 
 The repo is `github.com/shaeberling/trs-bot` (the user's friend's account).
