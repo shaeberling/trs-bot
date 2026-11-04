@@ -32,6 +32,10 @@ Lawrence bought a pair Oct 31.
 
 [Datasheet](datasheets/JF-0530B%20datasheet.pdf)
 
+On AliExpress they're $1 each, but be careful, the listing says 300 mA:
+
+https://www.aliexpress.us/item/3256805810546756.html
+
 # Solenoid driver
 
 ## MTSD001 (MOSFET Trigger Switch Drive Module)

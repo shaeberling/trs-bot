@@ -12,6 +12,90 @@ the round-trip latency with the camera.
   </picture>
 </p>
 
+## Position and force
+
+The JF-0530B solenoid has 10 mm of travel. When powered, it pulls its plunger
+into the coil, which pushes the rod out the other end. The force depends on how
+much of the air gap inside the coil is left to close. At 12 V, from the
+datasheet:
+
+| Gap left | Force |
+|---|---|
+| 10 mm (at rest) | almost nothing |
+| 5 mm | ~0.8 N |
+| 1 mm | ~2.5 N |
+| 0 mm (closed: plunger in, rod fully extended) | ~5 N |
+
+A Model I key probably needs under 1 N (to be measured), so for the first
+5 mm or so of its travel the solenoid can barely push it. That's why the first
+test only worked with the rod starting a few millimeters above the key: it has
+to reach the key late in the stroke, where the force is high.
+
+We should measure these things on real Model I keyboards, both Alps and Hi-Tek:
+
+- Force needed to push the key, at the activation point and at the bottom. (It
+  probably isn't constant across the push.)
+- Distance from unpushed to start-of-activation.
+- Distance from start-of-activation to fully pushed down.
+- Height of the keycap above whatever the rig rests on, which sets the mount
+  geometry.
+
+To find the activation point, run `10 PRINT @0, PEEK(14400);: GOTO 10`. It
+shows keyboard row 6 (`0x3840`), where SPACE is bit 7 (128). Then lower the key
+in measured steps (feeler gauges, shims, or calipers) and note where the value
+changes.
+
+We might want to hold keys down for a long time (say, for thrust
+or steering), which at full power would overheat the solenoid (see the next
+section). We can avoid this by using PWM to lower the power. That also lowers
+the force, but much less once the air gap is closed: the steel is saturated,
+so at zero gap a tenth of the power still gives about 4 N instead of 6 N. So
+we use full power while pushing the key, until the rod is fully extended and
+the air gap is closed, then drop to a holding duty. The full-power phase has to
+last until the plunger has actually closed. If it drops too early, the plunger
+stalls with a gap left, where the holding force is weak. So we should also
+measure how long the plunger takes to close.
+
+Since the rod has to extend fully, and the height might be too fussy to
+calibrate on a real machine at a show, we can allow some slop by adding a
+spring at the end of the rod. It screws onto the rod's M3(?) thread, where the
+rubber cap goes now. The spring has to be:
+
+- Strong enough: where the key bottoms out (or at least passes activation),
+  the spring has to push harder than the key's spring, so more than about 1 N.
+- Weak enough: in the last millimeter or two of the stroke, the key's spring
+  plus this spring have to stay under what the solenoid delivers there (about
+  2.5 N at 1 mm). So about 1–2 N when fully compressed.
+
+How far the spring can compress is how much calibration slop we get.
+
+## Power and duty cycle
+
+The datasheet's force curves are for steady DC at 1.8, 3.6, 7.2 and 18 W.
+Each has a maximum duty cycle: the fraction of time the coil may be on,
+averaged over seconds to minutes. Power × duty cycle is 1.8 W for every line,
+which is the heat the coil can get rid of continuously. The datasheet also
+says not to leave it on for more than about 2 seconds at a time.
+
+From the 12 V supply, fast PWM (10–20 kHz) acts like a lower DC voltage. The
+coil's inductance smooths the current to about duty × 12 V / 13.7 Ω, so power
+is about duty² × 10.5 W. Slow PWM (around 1 kHz) lets the current ripple and
+makes the coil whine.
+
+| Datasheet line | Max duty cycle | DC on our 13.7 Ω coil | PWM duty from 12 V |
+|---|---|---|---|
+| 1.8 W | 100% | 5.0 V | ~41% |
+| 3.6 W | 50% | 7.0 V | ~59% |
+| 7.2 W | 25% | 9.9 V | ~83% |
+| 10.5 W (12 V DC) | ~17% (interpolated) | 12 V | 100% |
+| 18 W | 10% | 15.7 V | not possible from 12 V |
+
+So keep the average under about 1.8 W:
+
+- Holding at ~40% PWM (~1.7 W) can last indefinitely.
+- Full-power taps can take up about 17% of the time, e.g. three 50 ms taps per
+  second, sustained.
+
 ## Parts
 
 Details and links are in [PARTS.md](../PARTS.md).
@@ -62,10 +146,10 @@ Then try peak-and-hold, which keeps a held key from overheating the solenoid:
 from machine import Pin, PWM
 import time
 
-pwm = PWM(Pin(15), freq=1000, duty_u16=0)
-pwm.duty_u16(65535)   # full power to pull the plunger in
-time.sleep_ms(20)
-pwm.duty_u16(20000)   # ~30% to hold; tune down until the key slips
+pwm = PWM(Pin(15), freq=10_000, duty_u16=0)
+pwm.duty_u16(65535)   # full power until the plunger has closed
+time.sleep_ms(20)     # measure how long closing actually takes
+pwm.duty_u16(26000)   # ~40% (~1.7 W) to hold; tune down until the key slips
 time.sleep(2)
 pwm.duty_u16(0)
 ```
